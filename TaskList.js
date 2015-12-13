@@ -22,9 +22,10 @@ const styles = React.StyleSheet.create({
         marginTop: 10,
         justifyContent: 'center',
         alignItems: 'center',
-        borderBottomColor: '#05A5D1',
-        borderBottomWidth: 3,
+        borderColor: '#05A5D1',
+        borderWidth: 2,
         backgroundColor: '#333',
+        margin: 20,
     },
 });
 
