@@ -76,7 +76,7 @@ class TaskList extends React.Component {
                 backgroundColor: '#F7F7F7',
                 flex: 1,
                 justifyContent: 'flex-start',
-                paddingTop: 20,
+                paddingTop: 40,
             }}
             >
 
