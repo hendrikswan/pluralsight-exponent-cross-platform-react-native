@@ -7,7 +7,6 @@ const {
 } = React;
 import _ from 'lodash';
 import TaskRow from './TaskRow';
-//import store from './todoStore';
 
 const styles = React.StyleSheet.create({
     buttonText: {
@@ -34,7 +33,7 @@ class TaskList extends React.Component {
     constructor(props, context) {
         super(props, context);
 
-        const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+        const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
         this.state = {
             dataSource: this.cloneDataSource(ds, this.props),
         };
@@ -43,11 +42,11 @@ class TaskList extends React.Component {
 
     componentWillReceiveProps(nextProps) {
         const dataSource = this.cloneDataSource(this.state.dataSource, nextProps);
-        this.setState({dataSource});
+        this.setState({ dataSource });
     }
 
     cloneDataSource(dataSource, props) {
-        const filteredTodos = _.where(props.todos, {state: props.selectedState});
+        const filteredTodos = _.where(props.todos, { state: props.selectedState });
         return dataSource.cloneWithRows(filteredTodos);
     }
 
@@ -64,10 +63,9 @@ class TaskList extends React.Component {
     }
 
     addPressed(task) {
-        this.props.nav.push({
-            name: 'taskform',
-            onAdd: this.props.onTodoAdd,
-        });
+        if (this.props.onAddStarted) {
+            this.props.onAddStarted();
+        }
     }
 
     render() {
@@ -89,7 +87,8 @@ class TaskList extends React.Component {
 
                 <TouchableHighlight
                     onPress={this.addPressed.bind(this)}
-                    style={styles.button}>
+                    style={styles.button}
+                >
 
                     <Text style={styles.buttonText}>
                         Add one
@@ -102,10 +101,7 @@ class TaskList extends React.Component {
 }
 
 TaskList.propTypes = {
-    nav: React.PropTypes.shape({
-        push: React.PropTypes.func,
-    }).isRequired,
-    onTodoAdd: React.PropTypes.func.isRequired,
+    onAddStarted: React.PropTypes.func.isRequired,
     onTodoDone: React.PropTypes.func.isRequired,
     selectedState: React.PropTypes.string.isRequired,
     todos: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,

@@ -14,7 +14,6 @@ const {
 import TaskList from './TaskList';
 import TaskForm from './TaskForm';
 
-import store from './todoStore';
 
 class CrossTodo extends Component {
 
@@ -31,9 +30,6 @@ class CrossTodo extends Component {
         };
     }
 
-    copyState() {
-        this.setState(store.getState());
-    }
 
     getRememberHandler(id) {
         return (component) => {
@@ -43,14 +39,25 @@ class CrossTodo extends Component {
 
     handleTodoDone(todo) {
         todo.state = 'Done';
-        this.setState({todos: this.state.todos});
+        this.setState({ todos: this.state.todos });
     }
 
-    onTodoAdd(task) {
+    onAddStarted() {
+        this.nav.push({
+            name: 'taskform',
+        });
+    }
+
+    onAdd(task) {
         this.state.todos.push({
             task: task,
             state: 'Pending',
-        })
+        });
+        this.nav.pop();
+    }
+
+    onCancel(task) {
+        this.nav.pop();
     }
 
     renderScene(route, nav) {
@@ -59,6 +66,8 @@ class CrossTodo extends Component {
             return (
                 <TaskForm
                     nav={nav}
+                    onAdd={this.onAdd.bind(this)}
+                    onCancel={this.onCancel.bind(this)}
                     route={route}
                 />
             );
@@ -66,7 +75,7 @@ class CrossTodo extends Component {
             return (
                 <TaskList
                     nav={nav}
-                    onTodoAdd={this.onTodoAdd.bind(this)}
+                    onAddStarted={this.onAddStarted.bind(this)}
                     onTodoDone={this.handleTodoDone.bind(this)}
                     route={route}
                     selectedState={this.state.selectedState}
@@ -84,8 +93,8 @@ class CrossTodo extends Component {
         return (
             <Navigator
                 configureScene={this.configureScene}
-                initialRoute={{name: 'tasklist', index: 0}}
-                ref={this.getRememberHandler.bind(this)('navigator')}
+                initialRoute={{ name: 'tasklist', index: 0 }}
+                ref={this.getRememberHandler('nav')}
                 renderScene={this.renderScene.bind(this)}
             />
         );

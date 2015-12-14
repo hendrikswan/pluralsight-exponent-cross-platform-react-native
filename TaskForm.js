@@ -39,14 +39,15 @@ class TaskForm extends React.Component {
     }
 
     addPressed() {
-        if (this.props.route.onAdd) {
-            this.props.route.onAdd(this.state.todo);
+        if (this.props.onAdd) {
+            this.props.onAdd(this.state.todo);
         }
-        this.props.nav.pop();
     }
 
     cancelPressed() {
-        this.props.nav.pop();
+        if (this.props.onCancel) {
+            this.props.onCancel();
+        }
     }
 
     render() {
@@ -60,7 +61,7 @@ class TaskForm extends React.Component {
                 }}
             >
                 <TextInput
-                    onChangeText={(todo) => this.setState({todo})}
+                    onChangeText={(todo) => this.setState({ todo })}
                     placeholder="Enter task"
                     style={{
                         height: 50,
@@ -99,10 +100,8 @@ class TaskForm extends React.Component {
 }
 
 TaskForm.propTypes = {
-    nav: React.PropTypes.shape({
-        push: React.PropTypes.func,
-        pop: React.PropTypes.func,
-    }).isRequired,
+    onAdd: React.PropTypes.func.isRequired,
+    onCancel: React.PropTypes.func.isRequired,
 };
 
 export default TaskForm;
