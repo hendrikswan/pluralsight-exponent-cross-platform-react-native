@@ -1,10 +1,7 @@
 import React from 'react-native';
 const {
-    Animated,
-    Easing,
     Text,
     View,
-    Image,
     TouchableHighlight,
 } = React;
 
