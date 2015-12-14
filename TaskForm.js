@@ -7,7 +7,6 @@ const {
     TouchableHighlight,
 } = React;
 
-import store from './todoStore';
 
 const styles = React.StyleSheet.create({
     buttonText: {

@@ -20,8 +20,15 @@ class CrossTodo extends Component {
 
     constructor(props) {
         super(props);
-        this.state = store.getState();
-        store.subscribe(this.copyState.bind(this));
+        this.state = {
+            todos: [
+                {
+                    task: 'React native course!',
+                    state: 'Pending',
+                },
+            ],
+            selectedState: 'Pending',
+        };
     }
 
     copyState() {
@@ -35,19 +42,15 @@ class CrossTodo extends Component {
     }
 
     handleTodoDone(todo) {
-        // todo.state = 'Done';
-        // this.setState({todos: this.state.todos});
-        store.dispatch({
-            type: 'DONE_TODO',
-            todo: todo,
-        });
+        todo.state = 'Done';
+        this.setState({todos: this.state.todos});
     }
 
     onTodoAdd(task) {
-        store.dispatch({
-            type: 'ADD_TODO',
+        this.state.todos.push({
             task: task,
-        });
+            state: 'Pending',
+        })
     }
 
     renderScene(route, nav) {
@@ -63,7 +66,7 @@ class CrossTodo extends Component {
             return (
                 <TaskList
                     nav={nav}
-                    onTodoAdd={this.onTodoAdd}
+                    onTodoAdd={this.onTodoAdd.bind(this)}
                     onTodoDone={this.handleTodoDone.bind(this)}
                     route={route}
                     selectedState={this.state.selectedState}
