@@ -13,23 +13,21 @@ const {
 
 import TaskList from './TaskList';
 import TaskForm from './TaskForm';
+import store from './todoStore';
 
 
 class CrossTodo extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            todos: [
-                {
-                    task: 'React native course!',
-                    state: 'Pending',
-                },
-            ],
-            selectedState: 'Pending',
-        };
+        this.state = store.getState();
+
+        store.subscribe(this.copyState.bind(this));
     }
 
+    copyState() {
+        this.setState(store.getState());
+    }
 
     getRememberHandler(id) {
         return (component) => {
@@ -39,7 +37,10 @@ class CrossTodo extends Component {
 
     handleTodoDone(todo) {
         todo.state = 'Done';
-        this.setState({ todos: this.state.todos });
+        store.dispatch({
+            type: 'DONE_TODO',
+            todo: todo,
+        });
     }
 
     onAddStarted() {
@@ -49,9 +50,9 @@ class CrossTodo extends Component {
     }
 
     onAdd(task) {
-        this.state.todos.push({
+        store.dispatch({
+            type: 'ADD_TODO',
             task: task,
-            state: 'Pending',
         });
         this.nav.pop();
     }
