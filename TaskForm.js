@@ -30,17 +30,15 @@ const styles = React.StyleSheet.create({
     },
 });
 
+
 class TaskForm extends React.Component {
     constructor(props, context) {
         super(props, context);
-        this.state = {
-            todo: '',
-        };
     }
 
     addPressed() {
         if (this.props.onAdd) {
-            this.props.onAdd(this.state.todo);
+            this.props.onAdd(this.todo);
         }
     }
 
@@ -61,7 +59,7 @@ class TaskForm extends React.Component {
                 }}
             >
                 <TextInput
-                    onChangeText={(todo) => this.setState({ todo })}
+                    onChangeText={(todo) => this.todo = todo}
                     placeholder="Enter task"
                     style={{
                         height: 50,
