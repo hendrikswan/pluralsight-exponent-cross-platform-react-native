@@ -102,4 +102,4 @@ class CrossTodo extends Component {
     }
 }
 
-AppRegistry.registerComponent('main', () => CrossTodo);
+export default CrossTodo;

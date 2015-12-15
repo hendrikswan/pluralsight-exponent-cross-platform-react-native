@@ -1,12 +1,11 @@
 {
-  "name": "exponent-cross-platform-react-native",
-  "version": "0.0.0",
-  "description": "Hello Exponent!",
-  "main": "main.js",
-  "author": null,
+  "name": "CopyFromExponent",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "react-native start"
+  },
   "dependencies": {
-    "lodash": "^3.10.1",
-    "react-native": "exponentjs/react-native#2015-11-13",
-    "redux": "^3.0.5"
+    "react-native": "^0.16.0"
   }
 }
