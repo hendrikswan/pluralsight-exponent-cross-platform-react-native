@@ -3,6 +3,7 @@ const {
     Text,
     View,
     TouchableHighlight,
+    Image,
 } = React;
 
 
@@ -36,11 +37,15 @@ export default function () {
                 style={{
                     borderRadius: 5,
                     padding: 5,
-                    backgroundColor: '#EAEAEA',
                 }}
                 underlayColor="#ddd"
             >
-                <Text>Done</Text>
+                <Image
+                    source={require('../images/done.png')}
+                    style={{
+                        marginTop: 0,
+                    }}
+                />
             </TouchableHighlight>
         </View>
 
