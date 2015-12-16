@@ -3,6 +3,7 @@ import React from 'react-native';
 const {
     Text,
     View,
+    Animated,
 } = React;
 
 import Swipeout from 'react-native-swipeout';
@@ -26,6 +27,7 @@ export default function () {
             }}
         >
             <Swipeout
+                autoClose
                 backgroundColor="#fff"
                 right={swipeoutBtns}
             >

@@ -7,7 +7,9 @@ class TaskRow extends React.Component {
     }
 
     handleDonePress() {
-        this.props.onTodoDone(this.props.todo);
+        setTimeout(() => {
+            this.props.onTodoDone(this.props.todo);
+        }, 400);
     }
 
     render() {

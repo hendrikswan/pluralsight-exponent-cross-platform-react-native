@@ -42,6 +42,7 @@
         "id-length": 0,
     },
     "ecmaFeatures": {
-      "jsx": true
+      "jsx": true,
+      "experimentalObjectRestSpread": true,
     },
 }
