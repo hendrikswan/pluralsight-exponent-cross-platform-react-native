@@ -6,7 +6,7 @@ const {
     Text,
 } = React;
 import _ from 'lodash';
-import TaskRow from './TaskRow';
+import TaskRow from './TaskRow/Component';
 
 const styles = React.StyleSheet.create({
     buttonText: {
